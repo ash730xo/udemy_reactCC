@@ -1,12 +1,7 @@
-import React from "react"
-
-function App() {
-
+const App = () => {
   return (
-    <>
-      <h1> Starter file </h1>
-    </>
+    <div>This is our first component</div>
   )
 }
 
-export default App
+export default App;
