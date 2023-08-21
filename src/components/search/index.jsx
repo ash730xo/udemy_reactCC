@@ -1,7 +1,10 @@
 import  { useState } from "react";
 import './syles.css'
 
-const Search = () => {
+const Search = (props) => {
+    console.log(props)
+
+    const {getDataFromSearchComponent} = props;
     //state value and function 
     const [inputValue, setInputValue] = useState('')
 
@@ -15,11 +18,16 @@ const Search = () => {
 
     console.log(inputValue)
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        getDataFromSearchComponent(inputValue)
+    }
+
     return (
-        <div className="Search">
+        <form onSubmit={handleSubmit} className="Search">
             <input name="search" onChange={handleInputValue} value={inputValue} placeholder="Search Recipes" id="Search"/>
             <button type="submit">Search</button>
-        </div>
+        </form>
     )
 }
 
