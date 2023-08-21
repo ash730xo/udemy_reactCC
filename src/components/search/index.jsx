@@ -1,4 +1,5 @@
 import React from "react";
+import './syles.css'
 
 const Search = () => {
     return (
