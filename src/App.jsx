@@ -1,11 +1,14 @@
 import React from "react";
 import './App.css'
+import Homepage from "./pages/homepage";
 
 //arrow function 
 function App() {
   // JSX 
   return (
-    <div className="App">This is our first component</div>
+    <div className="App">
+      <Homepage />
+    </div>
   )
 }
 
