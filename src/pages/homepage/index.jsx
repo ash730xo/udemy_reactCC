@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Search from "../../components/search";
+import './styles.css'
 import RecipeItem from "../../components/search/recipe-item";
 
 const dummydata = 'dummydata'
@@ -51,14 +52,12 @@ const Homepage = () => {
                 loadingState && <div className="loading">Loading recipes ! Please wait. </div>
             }
             {/* Show loading state */}
-
+            
             {/* Mapp through all the recipes */}
             <div className="items">
-            {
-                recipes && recipes.length > 0 ?
-                 recipes.map((item) => <RecipeItem item={item}/> ) 
-                    
-                 : null
+            {recipes && recipes.length > 0
+                ? recipes.map((item) => <RecipeItem item={item} />) : null
+
             }
             </div>
 
