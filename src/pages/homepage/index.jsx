@@ -52,11 +52,11 @@ const Homepage = () => {
                 loadingState && <div className="loading">Loading recipes ! Please wait. </div>
             }
             {/* Show loading state */}
-            
+
             {/* Mapp through all the recipes */}
             <div className="items">
             {recipes && recipes.length > 0
-                ? recipes.map((item) => <RecipeItem item={item} />) : null
+                ? recipes.map((item) => <RecipeItem id={item.id} image={item.image} titie = {item.title} item={item} />) : null
 
             }
             </div>
