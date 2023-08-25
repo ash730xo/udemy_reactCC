@@ -1,5 +1,6 @@
-import  { useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import './syles.css'
+import { ThemeContext } from "../../App";
 
 const Search = (props) => {
     console.log(props)
@@ -7,6 +8,8 @@ const Search = (props) => {
     const {getDataFromSearchComponent, apiCalledSuccess, setApiCalledSuccess} = props;
     //state value and function 
     const [inputValue, setInputValue] = useState('')
+
+    const {theme} = useContext(ThemeContext)
 
     const handleInputValue = (event) => {
         //gets the current value
@@ -36,7 +39,7 @@ const Search = (props) => {
     return (
         <form onSubmit={handleSubmit} className="Search">
             <input name="search" onChange={handleInputValue} value={inputValue} placeholder="Search Recipes" id="Search"/>
-            <button type="submit">Search</button>
+            <button style={theme ? {backgroundColor: "#12343b"}: {}} type="submit">Search</button>
         </form>
     )
 }

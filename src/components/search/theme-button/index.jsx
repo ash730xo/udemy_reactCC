@@ -9,6 +9,7 @@ const ThemeButton = () => {
     console.log(theme, setTheme)
     return (
         <button 
+        style={theme ? {backgroundColor : "#12343b"} : {} }
         className="themeButton"
         onClick={() => setTheme(!theme)}
         >Change Theme</button>

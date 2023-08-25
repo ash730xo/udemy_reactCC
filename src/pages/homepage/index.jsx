@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import Search from "../../components/search";
 import './styles.css'
 import RecipeItem from "../../components/search/recipe-item";
 import FavoriteItem from "../../components/search/favorite-item";
+import { ThemeContext } from "../../App";
 
 const dummydata = 'dummydata'
 
@@ -39,6 +40,8 @@ const Homepage = () => {
 
     //user reducer functionality
     const [filteredState, dispatch] = useReducer(reducer, initialState)
+
+    const {theme} = useContext(ThemeContext)
 
     const getDataFromSearchComponent = (getData) => {
         //keep the loading state as true before we are calling the API
@@ -120,7 +123,7 @@ const Homepage = () => {
             {/* show favorites items*/}
             <div className="favorites-wrapper">
 
-                <h1 className="favorites-title">Favorites</h1>
+                <h1 className="favorites-title" style={theme ? {color: "#12343b"}: {}}>Favorites</h1>
 
                 <div className="search-favorites">
                     <input 
