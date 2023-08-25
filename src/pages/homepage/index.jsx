@@ -62,8 +62,15 @@ const Homepage = () => {
         }
     }
 
-    console.log(favorites)
 
+    const removeFromFavorites = (getCurrentId) => {
+        let copyFavorites = [...favorites]
+        copyFavorites = copyFavorites.filter(item => item.id !== getCurrentId)
+
+        setFavorites(copyFavorites)
+        localStorage.setItem('favorites', JSON.stringify(copyFavorites))
+
+    }
     //gets data from local storage when pages load 
     useEffect(() => {
         const extractFravroitesFromLocal = JSON.parse(localStorage.getItem('favorites'))
@@ -88,6 +95,7 @@ const Homepage = () => {
                     favorites && favorites.length > 0 ? 
                     favorites.map(item => (
                         <FavoriteItem 
+                        removeFromFavorites = { () => removeFromFavorites(item.id)}
                         id={item.id} 
                         image={item.image} 
                         titie = {item.title} 

@@ -1,7 +1,7 @@
 import './styles.css'
 const FavoriteItem= (props) => {
 
-    const {id, image, title, } = props
+    const {id, image, title, removeFromFavorites} = props
     console.log(props, `recipe-item-props`)
     return(
         <div key={id} className="favorite-item" > 
@@ -11,7 +11,7 @@ const FavoriteItem= (props) => {
 
             <p>{title}</p>
 
-            <button type="button">Remove from favorites</button>
+            <button type="button" onClick={removeFromFavorites}>Remove from favorites</button>
         </div>
     )
 }
