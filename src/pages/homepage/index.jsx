@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Search from "../../components/search";
 import './styles.css'
 import RecipeItem from "../../components/search/recipe-item";
+import FavoriteItem from "../../components/search/favorite-item";
 
 const dummydata = 'dummydata'
 
@@ -78,8 +79,22 @@ const Homepage = () => {
                 dummydata= {dummydata} 
             />
             {/* show favorites items*/}
-            <div className="">
+            <div className="favorites-wrapper">
 
+                <h1 className="favorites-title">Favorites</h1>
+
+                <div className="favorites">
+                {
+                    favorites && favorites.length > 0 ? 
+                    favorites.map(item => (
+                        <FavoriteItem 
+                        id={item.id} 
+                        image={item.image} 
+                        titie = {item.title} 
+                    />
+                    ))
+                    : null}
+                </div>
             </div>
             {/* show favorites items*/}
 
