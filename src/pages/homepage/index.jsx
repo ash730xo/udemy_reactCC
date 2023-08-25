@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../../components/search";
 import './styles.css'
 import RecipeItem from "../../components/search/recipe-item";
@@ -63,12 +63,26 @@ const Homepage = () => {
 
     console.log(favorites)
 
+    //gets data from local storage when pages load 
+    useEffect(() => {
+        const extractFravroitesFromLocal = JSON.parse(localStorage.getItem('favorites'))
+        setFavorites(extractFravroitesFromLocal)        
+    }, [/*only loads once on loading page nothign in dependancy */])
+
+    console.log(favorites)
+
     return (
-        <div className="Homepage">
+        <div className="homepage">
             <Search 
-            getDataFromSearchComponent = {getDataFromSearchComponent} 
-            dummydata= {dummydata} 
+                getDataFromSearchComponent = {getDataFromSearchComponent} 
+                dummydata= {dummydata} 
             />
+            {/* show favorites items*/}
+            <div className="">
+
+            </div>
+            {/* show favorites items*/}
+
 
             {/* Show loading state */}
             {
