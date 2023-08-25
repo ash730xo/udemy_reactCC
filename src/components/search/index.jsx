@@ -1,10 +1,10 @@
-import  { useState } from "react";
+import  { useEffect, useState } from "react";
 import './syles.css'
 
 const Search = (props) => {
     console.log(props)
 
-    const {getDataFromSearchComponent} = props;
+    const {getDataFromSearchComponent, apiCalledSuccess, setApiCalledSuccess} = props;
     //state value and function 
     const [inputValue, setInputValue] = useState('')
 
@@ -22,6 +22,16 @@ const Search = (props) => {
         event.preventDefault()
         getDataFromSearchComponent(inputValue)
     }
+
+    useEffect(() => {
+        if(apiCalledSuccess) {
+            setInputValue('')
+            setApiCalledSuccess(false)
+        }
+
+    },
+    //whnever there is a change it will load 
+     [apiCalledSuccess])
 
     return (
         <form onSubmit={handleSubmit} className="Search">

@@ -17,6 +17,9 @@ const Homepage = () => {
     //favorites data state
     const [favorites, setFavorites] = useState([])
 
+    //state for api is succesfull or not
+    const [apiCalledSuccess, setApiCalledSuccess] = useState(false)
+
     const getDataFromSearchComponent = (getData) => {
         //keep the loading state as true before we are calling the API
         setLoadingState(true)
@@ -34,6 +37,7 @@ const Homepage = () => {
                 //set the recipes state
                 setLoadingState(false)
                 setRecipes(results)
+                setApiCalledSuccess(true);
             }
 
             console.log(result)
@@ -77,13 +81,15 @@ const Homepage = () => {
         setFavorites(extractFravroitesFromLocal)        
     }, [/*only loads once on loading page nothign in dependancy */])
 
-    console.log(favorites)
+    console.log(apiCalledSuccess)
 
     return (
         <div className="homepage">
             <Search 
                 getDataFromSearchComponent = {getDataFromSearchComponent} 
                 dummydata= {dummydata} 
+                apiCalledSuccess= {apiCalledSuccess}
+                setApiCalledSuccess={setApiCalledSuccess}
             />
             {/* show favorites items*/}
             <div className="favorites-wrapper">
