@@ -1,14 +1,35 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import './App.css'
 import Homepage from "./pages/homepage";
+import ThemeButton from "./components/search/theme-button";
+
+
+//create the context
+export const ThemeContext = createContext(null);
+
+//provide the context -- porviding value to component
+
+
+//consume the context -- access the value form component
 
 //arrow function 
 function App() {
+
+  const [theme, setTheme] = useState(false)
+
   // JSX 
   return (
-    <div className="App">
-      <Homepage />
-    </div>
+    <ThemeContext.Provider
+       value = {{
+          theme,
+          setTheme,
+       }}
+       >
+      <div className="App">
+      <ThemeButton />
+        <Homepage />
+      </div>
+    </ThemeContext.Provider>
   )
 }
 
