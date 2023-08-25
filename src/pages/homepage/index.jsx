@@ -13,6 +13,8 @@ const Homepage = () => {
     //save results that we recieve from the API
     const [recipes, setRecipes] = useState([])
 
+    
+
     const getDataFromSearchComponent = (getData) => {
         //keep the loading state as true before we are calling the API
         setLoadingState(true)
@@ -40,6 +42,11 @@ const Homepage = () => {
 
     console.log(loadingState, recipes, `loadingState, recipes`)
 
+    const addToFavorites = (getCurrentRecipeId) => {
+        console.log(getCurrentRecipeId)
+
+    }
+
     return (
         <div className="Homepage">
             <Search 
@@ -56,9 +63,16 @@ const Homepage = () => {
             {/* Mapp through all the recipes */}
             <div className="items">
             {recipes && recipes.length > 0
-                ? recipes.map((item) => <RecipeItem id={item.id} image={item.image} titie = {item.title} item={item} />) : null
-
-            }
+                ? recipes.map((item) => (
+                    <RecipeItem 
+                        addToFavorites={ () => addToFavorites(item.id)} 
+                        id={item.id} 
+                        image={item.image} 
+                        titie = {item.title} 
+                        item={item} 
+                        />
+                    )) 
+                : null}
             </div>
 
             {/* Mapp through all the recipes */}
