@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useReducer, useState } from "react";
 import Search from "../../components/search";
 import './styles.css'
 import RecipeItem from "../../components/search/recipe-item";
@@ -71,8 +71,7 @@ const Homepage = () => {
 
     console.log(loadingState, recipes, `loadingState, recipes`)
 
-    const addToFavorites = (getCurrentRecipeItem) => {
-
+    const addToFavorites = useCallback((getCurrentRecipeItem) => {
         let copyFavorites = [...favorites]
 
         const index = copyFavorites.findIndex(item => item.id === getCurrentRecipeItem.id)
@@ -87,7 +86,25 @@ const Homepage = () => {
         } else {
             alert('Item is already present in favorites')
         }
-    }
+    },[favorites])
+
+    // const addToFavorites = (getCurrentRecipeItem) => {
+
+    //     // let copyFavorites = [...favorites]
+
+    //     // const index = copyFavorites.findIndex(item => item.id === getCurrentRecipeItem.id)
+    //     // console.log(index)
+
+    //     // //if item is not present
+    //     // if(index === -1) {
+    //     //     copyFavorites.push(getCurrentRecipeItem)
+    //     //     setFavorites(copyFavorites)
+    //     //     //save the favorites in local storage
+    //     //     localStorage.setItem('favorites', JSON.stringify(copyFavorites))
+    //     // } else {
+    //     //     alert('Item is already present in favorites')
+    //     // }
+    // }
 
 
     const removeFromFavorites = (getCurrentId) => {
@@ -111,6 +128,21 @@ const Homepage = () => {
     const filteredFavoritesItems = favorites.filter((item) => 
         item.title.toLowerCase().includes(filteredState.filteredValue)
     )
+
+    const renderRecipes = useCallback(() => {
+
+        if (recipes && recipes.length > 0) {
+            return(
+                recipes.map((item) => (
+                    <RecipeItem 
+                        addToFavorites={ () => addToFavorites(item)} 
+                        id={item.id} 
+                        image={item.image} 
+                        titie = {item.title} 
+                        item={item} 
+                        />
+                    )))}
+    }, [recipes, addToFavorites])
 
     return (
         <div className="homepage">
@@ -161,7 +193,19 @@ const Homepage = () => {
 
             {/* Mapp through all the recipes */}
             <div className="items">
-            {recipes && recipes.length > 0
+            {
+                useMemo( () => (
+                    !loadingState && recipes && recipes.length > 0 ? recipes.map((item => (
+                        <RecipeItem 
+                        addToFavorites={ () => addToFavorites(item)} 
+                        id={item.id} 
+                        image={item.image} 
+                        titie = {item.title} 
+                        />
+                    ), [])) 
+                ))
+            }
+            {/* {recipes && recipes.length > 0
                 ? recipes.map((item) => (
                     <RecipeItem 
                         addToFavorites={ () => addToFavorites(item)} 
@@ -171,7 +215,7 @@ const Homepage = () => {
                         item={item} 
                         />
                     )) 
-                : null}
+                : null} */}
             </div>
 
             {/* Mapp through all the recipes */}

@@ -34,7 +34,7 @@ const Search = (props) => {
 
     },
     //whnever there is a change it will load 
-     [apiCalledSuccess])
+     [apiCalledSuccess, getCurrentRecipeItem])
 
     return (
         <form onSubmit={handleSubmit} className="Search">
